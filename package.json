@@ -3,6 +3,10 @@
       "name": "ZEN-MIND AI Companion",
       "version": "0.1.0",
       "private": true,
+      "main": "server.js",
+      "scripts": {
+      "start": "node server.js"
+       },
       "dependencies": {
           "@getbrevo/brevo": "*",
           "@radix-ui/react-accordion": "^1.2.3",
