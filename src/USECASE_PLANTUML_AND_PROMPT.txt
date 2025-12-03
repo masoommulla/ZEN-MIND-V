@@ -1,0 +1,599 @@
+═══════════════════════════════════════════════════════════════════════════════
+  ZEN-MIND USE CASE DIAGRAM - PLANTUML CODE & CHATGPT PROMPT
+═══════════════════════════════════════════════════════════════════════════════
+
+SECTION 1: PLANTUML CODE
+═══════════════════════════════════════════════════════════════════════════════
+
+@startuml ZEN-MIND_Use_Case_Diagram
+
+' Styling
+skinparam usecase {
+  BackgroundColor LightSkyBlue
+  BorderColor DarkBlue
+  ArrowColor DarkBlue
+  ActorBorderColor DarkBlue
+  ActorBackgroundColor LightYellow
+}
+
+skinparam actor {
+  BackgroundColor LightYellow
+  BorderColor DarkBlue
+}
+
+title ZEN-MIND Mental Wellness Platform\nUse Case Diagram (Verified Implementation)
+
+' ============================================================================
+' ACTORS
+' ============================================================================
+actor "Unregistered User" as UU #LightCoral
+actor "User (Teen)" as User #LightGreen
+actor "Therapist" as Therapist #LightBlue
+
+' ============================================================================
+' SYSTEM BOUNDARY
+' ============================================================================
+rectangle "ZEN-MIND System" {
+
+  ' ------------------------------------------------------------------------
+  ' UNREGISTERED USER USE CASES (3)
+  ' ------------------------------------------------------------------------
+  package "Public Access" #LightGray {
+    usecase (View Landing Page) as UC1
+    usecase (Register) as UC2
+    usecase (Login to User Account) as UC3
+  }
+
+  ' ------------------------------------------------------------------------
+  ' USER AUTHENTICATION & PROFILE (4)
+  ' ------------------------------------------------------------------------
+  package "User Authentication & Profile" #Wheat {
+    usecase (Login) as UC4
+    usecase (Update Profile) as UC5
+    usecase (Change Password) as UC6
+    usecase (Logout) as UC7
+  }
+
+  ' ------------------------------------------------------------------------
+  ' MENTAL WELLNESS FEATURES (9)
+  ' ------------------------------------------------------------------------
+  package "Mental Wellness" #MistyRose {
+    usecase (Track Mood) as UC8
+    usecase (View Mood History) as UC9
+    usecase (Delete Mood Entry) as UC10
+    usecase (Create Journal Entry) as UC11
+    usecase (Edit Journal Entry) as UC12
+    usecase (Toggle Favorite Journal) as UC13
+    usecase (Search Journals) as UC14
+    usecase (Delete Journal Entry) as UC15
+    usecase (View Journal Stats) as UC16
+  }
+
+  ' ------------------------------------------------------------------------
+  ' PRODUCTIVITY TOOLS (10)
+  ' ------------------------------------------------------------------------
+  package "Productivity Tools" #Honeydew {
+    usecase (Create Todo) as UC17
+    usecase (Toggle Todo Complete) as UC18
+    usecase (Update Todo) as UC19
+    usecase (Delete Todo) as UC20
+    usecase (View Todo Stats) as UC21
+    usecase (Create Study Plan) as UC22
+    usecase (Toggle Study Complete) as UC23
+    usecase (Update Study Plan) as UC24
+    usecase (Delete Study Plan) as UC25
+    usecase (View Study Stats) as UC26
+    usecase (View Calendar) as UC27
+  }
+
+  ' ------------------------------------------------------------------------
+  ' AI & RESOURCES (5)
+  ' ------------------------------------------------------------------------
+  package "AI & Resources" #Lavender {
+    usecase (Chat with AI) as UC28
+    usecase (Browse Resources) as UC29
+    usecase (Play Mini Games) as UC30
+    usecase (Watch Videos) as UC31
+    usecase (Listen to Music) as UC32
+  }
+
+  ' ------------------------------------------------------------------------
+  ' THERAPIST SERVICES (13)
+  ' ------------------------------------------------------------------------
+  package "Therapist Services" #LightCyan {
+    usecase (Browse Therapists) as UC33
+    usecase (Search Therapists) as UC34
+    usecase (Sort Therapists) as UC35
+    usecase (View Therapist Profile) as UC36
+    usecase (Check Therapist Status) as UC37
+    usecase (Select Session Duration) as UC38
+    usecase (Make Payment) as UC39
+    usecase (Book Instant Session) as UC40
+    usecase (View Appointments) as UC41
+    usecase (Join Video Session) as UC42
+    usecase (Cancel Appointment) as UC43
+    usecase (Submit Review) as UC44
+    usecase (View Session History) as UC45
+  }
+
+  ' ------------------------------------------------------------------------
+  ' THERAPIST AUTHENTICATION & PROFILE (6)
+  ' ------------------------------------------------------------------------
+  package "Therapist Authentication" #PeachPuff {
+    usecase (Login to Therapist Portal) as UC46
+    usecase (Update Therapist Profile) as UC47
+    usecase (Upload Profile Picture) as UC48
+    usecase (Change Therapist Password) as UC49
+    usecase (Reset Password via OTP) as UC50
+    usecase (Therapist Logout) as UC51
+  }
+
+  ' ------------------------------------------------------------------------
+  ' THERAPIST SESSION MANAGEMENT (5)
+  ' ------------------------------------------------------------------------
+  package "Session Management" #LightSteelBlue {
+    usecase (View Today's Appointments) as UC52
+    usecase (View Session Details) as UC53
+    usecase (Join Therapist Video Session) as UC54
+    usecase (Monitor Active Session) as UC55
+    usecase (End Video Session) as UC56
+  }
+
+  ' ------------------------------------------------------------------------
+  ' THERAPIST SETTINGS (2)
+  ' ------------------------------------------------------------------------
+  package "Therapist Settings" #Khaki {
+    usecase (Update Pricing) as UC57
+    usecase (View Current Pricing) as UC58
+  }
+
+  ' ------------------------------------------------------------------------
+  ' SYSTEM USE CASES (9 - Automated)
+  ' ------------------------------------------------------------------------
+  package "System Automation" #LightGray {
+    usecase (Generate Meeting Link) as SYS1
+    usecase (Enforce 5-Minute Wait) as SYS2
+    usecase (Update Session Status) as SYS3
+    usecase (Calculate Statistics) as SYS4
+    usecase (Generate AI Suggestions) as SYS5
+    usecase (Verify Payment) as SYS6
+    usecase (Auto-End Session) as SYS7
+    usecase (Update Therapist Busy Status) as SYS8
+    usecase (Send OTP Email) as SYS9
+  }
+}
+
+' ============================================================================
+' EXTERNAL SYSTEMS
+' ============================================================================
+rectangle "External Systems" #LightGray {
+  usecase (Botpress Cloud) as EXT1
+  usecase (Jitsi Video) as EXT2
+  usecase (YouTube) as EXT3
+  usecase (Spotify) as EXT4
+  usecase (MongoDB Atlas) as EXT5
+  usecase (Email Service) as EXT6
+}
+
+' ============================================================================
+' UNREGISTERED USER ASSOCIATIONS
+' ============================================================================
+UU --> UC1
+UU --> UC2
+UU --> UC3
+
+' ============================================================================
+' USER (TEEN) ASSOCIATIONS
+' ============================================================================
+
+' Authentication & Profile
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+
+' Mental Wellness
+User --> UC8
+User --> UC9
+User --> UC10
+User --> UC11
+User --> UC12
+User --> UC13
+User --> UC14
+User --> UC15
+User --> UC16
+
+' Productivity
+User --> UC17
+User --> UC18
+User --> UC19
+User --> UC20
+User --> UC21
+User --> UC22
+User --> UC23
+User --> UC24
+User --> UC25
+User --> UC26
+User --> UC27
+
+' AI & Resources
+User --> UC28
+User --> UC29
+User --> UC30
+User --> UC31
+User --> UC32
+
+' Therapist Services
+User --> UC33
+User --> UC34
+User --> UC35
+User --> UC36
+User --> UC37
+User --> UC38
+User --> UC39
+User --> UC40
+User --> UC41
+User --> UC42
+User --> UC43
+User --> UC44
+User --> UC45
+
+' ============================================================================
+' THERAPIST ASSOCIATIONS
+' ============================================================================
+
+' Authentication
+Therapist --> UC46
+Therapist --> UC47
+Therapist --> UC48
+Therapist --> UC49
+Therapist --> UC50
+Therapist --> UC51
+
+' Session Management
+Therapist --> UC52
+Therapist --> UC53
+Therapist --> UC54
+Therapist --> UC55
+Therapist --> UC56
+
+' Settings
+Therapist --> UC57
+Therapist --> UC58
+
+' ============================================================================
+' INCLUDE RELATIONSHIPS
+' ============================================================================
+UC2 .> UC4 : <<include>>
+UC40 .> UC39 : <<include>>
+UC40 .> SYS1 : <<include>>
+UC42 .> SYS2 : <<include>>
+UC54 .> SYS2 : <<include>>
+UC50 .> SYS9 : <<include>>
+UC8 .> SYS5 : <<include>>
+
+' ============================================================================
+' EXTEND RELATIONSHIPS
+' ============================================================================
+UC44 ..> UC41 : <<extend>>
+SYS8 ..> UC54 : <<extend>>
+SYS8 ..> UC42 : <<extend>>
+
+' ============================================================================
+' SYSTEM AUTOMATION RELATIONSHIPS
+' ============================================================================
+SYS1 --> EXT2
+SYS3 --> EXT5
+SYS4 --> EXT5
+SYS6 --> EXT5
+SYS7 --> EXT5
+SYS8 --> EXT5
+SYS9 --> EXT6
+UC28 --> EXT1
+UC31 --> EXT3
+UC32 --> EXT4
+
+@enduml
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  SECTION 2: CHATGPT PROMPT FOR IMAGE GENERATION
+═══════════════════════════════════════════════════════════════════════════════
+
+PROMPT:
+--------
+
+Create a comprehensive Use Case Diagram for the ZEN-MIND mental wellness platform for teenagers. The diagram should be professional, well-organized, and visually clear.
+
+**ACTORS (3):**
+1. Unregistered User (not logged in) - Color: Coral
+2. User (Teen) (registered 13-19 year old) - Color: Green
+3. Therapist (mental health professional) - Color: Blue
+
+**SYSTEM BOUNDARY:** All use cases are within "ZEN-MIND System" rectangle
+
+**USE CASE PACKAGES (8 groups):**
+
+📦 **PUBLIC ACCESS (3 use cases)** - Gray background
+- Unregistered User can:
+  • View Landing Page
+  • Register
+  • Login to User Account
+
+📦 **USER AUTHENTICATION & PROFILE (4 use cases)** - Wheat background
+- User can:
+  • Login
+  • Update Profile
+  • Change Password
+  • Logout
+
+📦 **MENTAL WELLNESS (9 use cases)** - MistyRose background
+- User can:
+  • Track Mood (with intensity 1-10)
+  • View Mood History
+  • Delete Mood Entry
+  • Create Journal Entry
+  • Edit Journal Entry
+  • Toggle Favorite Journal
+  • Search Journals
+  • Delete Journal Entry
+  • View Journal Stats
+
+📦 **PRODUCTIVITY TOOLS (11 use cases)** - Honeydew background
+- User can:
+  • Create Todo
+  • Toggle Todo Complete
+  • Update Todo
+  • Delete Todo
+  • View Todo Stats
+  • Create Study Plan
+  • Toggle Study Complete
+  • Update Study Plan
+  • Delete Study Plan
+  • View Study Stats
+  • View Calendar
+
+📦 **AI & RESOURCES (5 use cases)** - Lavender background
+- User can:
+  • Chat with AI (Botpress)
+  • Browse Resources
+  • Play Mini Games
+  • Watch Videos (YouTube)
+  • Listen to Music (Spotify)
+
+📦 **THERAPIST SERVICES (13 use cases)** - LightCyan background
+- User can:
+  • Browse Therapists
+  • Search Therapists
+  • Sort Therapists
+  • View Therapist Profile
+  • Check Therapist Status (busy/available)
+  • Select Session Duration
+  • Make Payment (fake UPI/CC)
+  • Book Instant Session
+  • View Appointments
+  • Join Video Session (Jitsi)
+  • Cancel Appointment
+  • Submit Review
+  • View Session History
+
+📦 **THERAPIST AUTHENTICATION (6 use cases)** - PeachPuff background
+- Therapist can:
+  • Login to Therapist Portal
+  • Update Therapist Profile
+  • Upload Profile Picture
+  • Change Therapist Password
+  • Reset Password via OTP
+  • Therapist Logout
+
+📦 **THERAPIST SESSION MANAGEMENT (5 use cases)** - LightSteelBlue background
+- Therapist can:
+  • View Today's Appointments
+  • View Session Details
+  • Join Therapist Video Session
+  • Monitor Active Session
+  • End Video Session
+
+📦 **THERAPIST SETTINGS (2 use cases)** - Khaki background
+- Therapist can:
+  • Update Pricing
+  • View Current Pricing
+
+📦 **SYSTEM AUTOMATION (9 use cases)** - LightGray background
+Automated system processes:
+  • Generate Meeting Link
+  • Enforce 5-Minute Wait
+  • Update Session Status
+  • Calculate Statistics
+  • Generate AI Suggestions
+  • Verify Payment
+  • Auto-End Session
+  • Update Therapist Busy Status
+  • Send OTP Email
+
+**EXTERNAL SYSTEMS (6)** - Outside main boundary, in separate rectangle:
+  • Botpress Cloud (AI chatbot)
+  • Jitsi Video (video conferencing)
+  • YouTube (embedded videos)
+  • Spotify (music streaming)
+  • MongoDB Atlas (database)
+  • Email Service (OTP delivery)
+
+**RELATIONSHIPS:**
+
+🔗 **INCLUDE relationships** (mandatory):
+- Register includes Login (auto-login after signup)
+- Book Instant Session includes Make Payment
+- Book Instant Session includes Generate Meeting Link
+- Join Video Session includes Enforce 5-Minute Wait
+- Join Therapist Video Session includes Enforce 5-Minute Wait
+- Reset Password via OTP includes Send OTP Email
+- Track Mood includes Generate AI Suggestions
+
+➕ **EXTEND relationships** (optional/conditional):
+- Submit Review extends View Appointments (after completed session)
+- Update Therapist Busy Status extends Join Video Session (automatic)
+- Update Therapist Busy Status extends Join Therapist Video Session (automatic)
+
+🔌 **EXTERNAL CONNECTIONS:**
+- Chat with AI → Botpress Cloud
+- Watch Videos → YouTube
+- Listen to Music → Spotify
+- Generate Meeting Link → Jitsi Video
+- System Automation → MongoDB Atlas (for data operations)
+- Send OTP Email → Email Service
+
+**DESIGN REQUIREMENTS:**
+1. Use ovals for all use cases
+2. Use stick figures for actors
+3. Group related use cases in packages with different background colors
+4. Draw solid lines from actors to use cases they can perform
+5. Use dashed arrows with <<include>> for mandatory relationships
+6. Use dashed arrows with <<extend>> for optional relationships
+7. Show external systems in a separate box outside the main boundary
+8. Include a title: "ZEN-MIND Mental Wellness Platform - Use Case Diagram"
+9. Add a legend showing actor colors and relationship types
+10. Ensure the layout is hierarchical and easy to read
+
+**IMPORTANT NOTES:**
+- This diagram represents ONLY features that are actually implemented in the codebase
+- Therapists CANNOT add/remove time slots (no UI for this feature)
+- All therapy sessions are instant bookings (no slot-based scheduling)
+- Both users and therapists must wait 5 minutes after booking before joining sessions
+- All sessions are 30 minutes duration (duration selector exists but not functional)
+
+**TOTAL USE CASES:** 58 (3 public + 42 user + 13 therapist + 9 system automation + 6 external)
+
+Please create a clear, professional use case diagram following UML standards with proper spacing, grouping, and visual hierarchy.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  SECTION 3: DETAILED DESCRIPTION FOR DIAGRAM CONTEXT
+═══════════════════════════════════════════════════════════════════════════════
+
+**USE CASE DIAGRAM DESCRIPTION:**
+
+The ZEN-MIND use case diagram illustrates a comprehensive mental wellness platform designed specifically for teenagers aged 13-19. The system serves three distinct actors with different capabilities and access levels.
+
+**Unregistered Users** represent visitors who have not yet created an account. They can view the landing page to learn about the platform's features, register for a new account by providing their name, email, password, and age (validated to ensure they are between 13-19 years old), and login to access their account. The registration process automatically includes login functionality, creating a seamless onboarding experience.
+
+**Users (Teens)** represent the primary audience - registered teenagers seeking mental wellness support. Once authenticated, they gain access to a rich ecosystem of features organized into five main categories:
+
+1. *Profile Management*: Users can update their personal information (name, email, phone, gender), change their password securely, and logout when finished.
+
+2. *Mental Wellness Tracking*: The core functionality includes mood tracking where users log their daily emotional state with an intensity scale (1-10), select specific emotions, and add contextual notes. The system automatically generates AI-powered suggestions for activities, books, or songs based on mood entries. Users can view their mood history with statistical insights and delete entries as needed. The journaling feature allows users to create detailed entries with titles, content, mood associations, and tags. Journals can be edited, marked as favorites, searched by content, deleted, and viewed with comprehensive statistics showing total entries and popular tags.
+
+3. *Productivity Tools*: Users manage their tasks through a todo system that supports categorization (personal, study, health, other), priority levels, completion toggling, editing, and deletion. Task statistics show completion rates and progress. Study plans help users organize their academic work by creating sessions with subject, topic, duration, and notes. Study sessions can be marked complete, edited, deleted, and tracked with total study time statistics. A calendar view integrates journals, todos, and study plans for holistic life management.
+
+4. *AI and Resources*: Users can chat with an AI companion powered by Botpress Cloud for 24/7 mental health support. The resources section provides curated motivational videos (via YouTube embeds), calming music playlists (via Spotify/YouTube links), and mini-games including Tic-Tac-Toe, Memory Match, and Breathing Exercises for stress relief and entertainment.
+
+5. *Professional Therapy Services*: Users can browse a list of licensed therapists, search by name or specialization, and sort by rating, experience, or cost. Each therapist profile displays comprehensive information including their about section, education credentials, years of experience, pricing per session, languages spoken, specializations, and user reviews with ratings. Real-time status indicators show if therapists are currently busy in a session or available. The booking process follows an instant booking model (not slot-based scheduling). Users select their desired session duration (30/45/60 minutes, though all sessions default to 30 minutes currently), complete a fake payment via UPI or Credit Card simulation, and receive immediate appointment confirmation. The system generates a Jitsi video conference link automatically. Users must wait 5 minutes from the booking time before they can join the session - this wait period is strictly enforced by the system. During the wait, users see a countdown timer. After the wait period, users can join the video session via Jitsi, which includes a real-time countdown showing remaining session time. Users can view all their appointments (upcoming and past), cancel scheduled sessions (which releases the therapist's time slot), view their session history, and submit reviews with ratings and comments after completed sessions.
+
+**Therapists** are licensed mental health professionals who access the platform through a separate therapist portal. They have three main areas of functionality:
+
+1. *Authentication and Profile*: Therapists login using their credentials. They can update their professional profile including name, email, profile photo, about section, education credentials, years of experience, languages spoken, and specializations. Profile pictures can be uploaded as files or specified via URL. Password management includes the ability to change password with current password verification, or reset password via OTP if forgotten. The OTP reset flow involves requesting an OTP sent to their email, verifying the 6-digit code, and setting a new password. Therapists can logout to end their session securely.
+
+2. *Session Management*: Therapists view their appointments filtered to show only today's sessions, sorted chronologically. Each appointment displays the session time, duration, and a live countdown timer. The countdown shows when the session becomes available to join (5 minutes after booking), when it starts, and when it ends. Therapists can only join sessions after 5 minutes have elapsed from the booking time - this prevents sessions from starting before both parties are ready. When joining, therapists enter a Jitsi video conference with the user. During the session, a real-time countdown monitors the remaining time. The system automatically ends sessions after the duration expires, though therapists can also manually end sessions. Session status updates automatically from scheduled to completed.
+
+3. *Settings*: Therapists can update their pricing by setting a price per session anywhere from ₹100 to ₹5000 (recommended range ₹400-1000). The session duration is fixed at 30 minutes. Therapists can view their current active pricing at any time.
+
+**System Automation** represents nine automated processes that run without user intervention:
+
+1. *Generate Meeting Link*: Automatically creates a unique Jitsi conference room link when a user books an appointment, ensuring privacy and uniqueness for each session.
+
+2. *Enforce 5-Minute Wait*: Strictly prevents both users and therapists from joining sessions before 5 minutes have elapsed from booking time, ensuring both parties have time to prepare.
+
+3. *Update Session Status*: Automatically transitions appointment status from scheduled to completed after sessions end, maintaining accurate records.
+
+4. *Calculate Statistics*: Continuously computes metrics for mood tracking (average mood, trends), journal entries (total count, popular tags), todos (completion rates), and study plans (total study hours), providing users with insights into their progress.
+
+5. *Generate AI Suggestions*: Triggers after mood logging to analyze the user's emotional state and provide personalized recommendations for activities (meditation, exercise, journaling), books (self-help, fiction), and songs (calming, uplifting), helping users take positive action.
+
+6. *Verify Payment*: Processes fake payment transactions (simulated UPI/Credit Card) and creates confirmed appointments only after successful payment, teaching users about the booking flow.
+
+7. *Auto-End Session*: Monitors active video sessions and automatically marks them complete when the duration (30 minutes) expires, ensuring sessions don't run indefinitely.
+
+8. *Update Therapist Busy Status*: Dynamically sets therapist availability status to "busy" when they join a video session and "available" when the session ends, helping users see real-time availability.
+
+9. *Send OTP Email*: Generates and emails a 6-digit OTP code to therapists requesting password reset, with expiration for security.
+
+**External Systems Integration:**
+
+The platform integrates with six external services:
+
+1. *Botpress Cloud*: Powers the AI chatbot for conversational mental health support, accessible 24/7 for users needing immediate assistance.
+
+2. *Jitsi Video*: Provides the video conferencing infrastructure for therapy sessions, chosen for its open-source nature and ease of integration.
+
+3. *YouTube*: Hosts and streams motivational videos embedded in the resources section, offering visual mental wellness content.
+
+4. *Spotify*: Provides curated playlists of calming music linked from the resources section for mood enhancement and stress relief.
+
+5. *MongoDB Atlas*: Serves as the cloud database backend storing all user data, therapist profiles, appointments, mood entries, journals, todos, study plans, and reviews with proper data isolation between users.
+
+6. *Email Service*: Handles OTP delivery for therapist password reset functionality, ensuring secure password recovery.
+
+**Key Design Decisions:**
+
+1. *Instant Booking vs Slot-Based*: The platform uses instant booking rather than traditional slot-based scheduling. Users book sessions immediately with available therapists rather than selecting from pre-defined time slots. This simplifies the user experience but means therapists cannot manually control their availability schedule.
+
+2. *5-Minute Wait Period*: Both users and therapists must wait 5 minutes after booking before joining sessions. This wait period serves multiple purposes: gives both parties time to prepare mentally, prevents accidental early joining, and simulates a realistic waiting room experience. The countdown timer creates anticipation and ensures readiness.
+
+3. *Fixed 30-Minute Sessions*: Although a duration selector exists in the UI (30/45/60 minutes), all sessions are currently implemented as 30 minutes. This standardization simplifies scheduling and ensures consistent therapist availability.
+
+4. *Fake Payment System*: The platform uses simulated payment processing (fake UPI and Credit Card) rather than real payment integration. This demonstrates the booking flow without requiring payment gateway setup, making it ideal for demonstration and MVP testing.
+
+5. *No Slot Management UI*: While the backend APIs support therapists adding and removing availability slots, the frontend does not provide UI for this functionality. This was a deliberate scope decision - the platform currently relies on instant booking availability rather than slot-based scheduling. Future versions could add slot management UI if slot-based scheduling is desired.
+
+6. *Age Restriction*: The platform specifically serves teenagers aged 13-19 years, enforced during registration. This demographic focus allows tailored content, design aesthetics (cartoon-modern with anime graphics), and language appropriate for teens.
+
+7. *Data Isolation*: Strong data isolation ensures users can only access their own mood entries, journals, todos, and study plans. Therapists only see their own appointments and profile. This privacy-first approach builds trust with the sensitive nature of mental health data.
+
+**User Journey Flow:**
+
+*Typical User Flow:*
+Visitor → Views Landing Page → Registers (provides age 13-19) → Auto-login → Dashboard → Tracks Mood (receives AI suggestions) → Creates Journal Entry → Adds Todos → Creates Study Plan → Views Calendar → Chats with AI → Browses Resources (watches videos, plays games) → Browses Therapists → Views Therapist Profile → Books Session → Completes Payment → Waits 5 minutes (countdown) → Joins Video Session → Completes Session → Submits Review → Views Appointments History → Updates Settings → Logout
+
+*Typical Therapist Flow:*
+Therapist → Logins to Portal → Views Today's Appointments → Updates Profile (education, specializations) → Sets Pricing (₹500/session) → Waits for Booking → Views Countdown → Joins Video Session (after 5-min wait) → Conducts Therapy → Monitors Countdown → Session Auto-ends → Changes Password → Logout
+
+**Implementation Status:**
+
+This diagram represents only features that are actually implemented and functional in the codebase, verified through:
+- Manual inspection of 15+ frontend React components
+- Review of 12+ backend API route files
+- Testing of UI interactions and API responses
+- Confirmation of database models and schemas
+
+Features that were discussed but not implemented (like therapist slot management UI) are explicitly excluded to ensure the diagram reflects reality, not aspirational features. This makes the diagram accurate for current deployment, documentation, and future development planning.
+
+**Conclusion:**
+
+The ZEN-MIND use case diagram captures a full-featured mental wellness platform that balances self-help tools (mood tracking, journaling, productivity), AI support, educational resources, and professional therapy services. The system provides a comprehensive support ecosystem for teenagers navigating mental health challenges, combining technology-driven support with human connection through licensed therapists.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  END OF DOCUMENT
+═══════════════════════════════════════════════════════════════════════════════
+
+INSTRUCTIONS FOR USE:
+
+1. PLANTUML CODE:
+   - Copy the PlantUML code (Section 1)
+   - Paste into PlantUML editor (plantuml.com or VS Code PlantUML extension)
+   - Generate PNG/SVG image
+   - Use for technical documentation
+
+2. CHATGPT PROMPT:
+   - Copy the entire prompt (Section 2)
+   - Paste into ChatGPT or DALL-E
+   - Request: "Based on this description, create a UML use case diagram image"
+   - Use for presentations and visual documentation
+
+3. DESCRIPTION:
+   - Use Section 3 for detailed context
+   - Include in project documentation
+   - Reference for developers understanding system scope
+   - Use for stakeholder communication
+
+═══════════════════════════════════════════════════════════════════════════════

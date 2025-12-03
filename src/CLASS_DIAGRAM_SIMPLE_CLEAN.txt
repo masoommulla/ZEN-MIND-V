@@ -1,0 +1,329 @@
+ZEN-MIND APPLICATION - CLASS DIAGRAMS
+CSE Department, KLECET, Chikodi 2024-25
+
+================================================================================
+CLASS 1: USER
+================================================================================
+
+ATTRIBUTES:
+-name: String
+-email: String
+-password: String
+-age: Number
+-avatar: String
+-role: String
+-profile.bio: String
+-profile.phone: String
+-profile.gender: String
+-profile.dateOfBirth: Date
+-settings.notifications.email: Boolean
+-settings.theme: String
+-subscription.plan: String
+-streakCount: Number
+-lastCheckIn: Date
+-createdAt: Date
+-updatedAt: Date
+
+METHODS:
++register(name, email, password, age): User - Creates new user account
++login(email, password): Token - Authenticates user and returns JWT token
++comparePassword(candidatePassword): Boolean - Validates password during login
++updateProfile(profileData): User - Updates user profile from Settings page
++updatePassword(currentPassword, newPassword): User - Changes user password
++updateStreak(): User - Increments daily check-in streak counter
+
+FUNCTIONALITY:
+Manages user authentication and profile. Handles registration with age validation (13-19 years). Provides secure login with JWT tokens. Tracks daily streak count for user engagement. Stores user preferences including theme, notifications, and privacy settings.
+
+================================================================================
+CLASS 2: MOOD
+================================================================================
+
+ATTRIBUTES:
+-userId: ObjectId
+-mood: String
+-intensity: Number
+-emotions: Array<String>
+-activities: Array<String>
+-notes: String
+-energy: Number
+-sleep.hours: Number
+-sleep.quality: String
+-social: String
+-suggestion.activity: String
+-suggestion.book: String
+-suggestion.song: String
+-date: Date
+-createdAt: Date
+
+METHODS:
++create(moodData): Mood - Logs new mood entry with intensity scale 1-10
++getAll(userId): Array<Mood> - Retrieves all mood entries for user
++getUserStats(userId, days): Object - Calculates mood statistics and averages
++update(moodId, userId, updateData): Mood - Updates existing mood entry
++delete(moodId, userId): void - Deletes mood entry from database
+
+FUNCTIONALITY:
+Tracks daily mood with intensity scale (1-10). Records emotions, activities, energy levels, sleep quality, and social interactions. Generates personalized suggestions (activity, book, song) after mood logging. Provides statistical analysis including mood distribution, average intensity, and trending patterns.
+
+================================================================================
+CLASS 3: JOURNAL
+================================================================================
+
+ATTRIBUTES:
+-userId: ObjectId
+-title: String
+-content: String
+-mood: String
+-tags: Array<String>
+-isPrivate: Boolean
+-isFavorite: Boolean
+-gratitude: Array<String>
+-goals.text: String
+-goals.completed: Boolean
+-aiInsights.sentiment: String
+-createdAt: Date
+-updatedAt: Date
+
+METHODS:
++create(userId, title, content): Journal - Creates new journal entry
++getAll(userId): Array<Journal> - Retrieves all journal entries for user
++getUserStats(userId): Object - Returns journal statistics and top tags
++search(userId, query): Array<Journal> - Searches journals by text content
++toggleFavorite(journalId, userId): Journal - Marks/unmarks entry as favorite
++delete(journalId, userId): void - Deletes journal entry from database
+
+FUNCTIONALITY:
+Manages personal journal entries with markdown support. Supports tags for organization and favorites for quick access. Includes gratitude lists and goal tracking with completion status. Provides AI-powered sentiment analysis. Offers search functionality and statistics including tag frequency and monthly entry counts.
+
+================================================================================
+CLASS 4: TODO
+================================================================================
+
+ATTRIBUTES:
+-userId: ObjectId
+-text: String
+-completed: Boolean
+-category: String
+-priority: String
+-dueDate: Date
+-completedAt: Date
+-createdAt: Date
+-updatedAt: Date
+
+METHODS:
++create(userId, text, category, priority): Todo - Creates new todo item
++getAll(userId, completed, category): Array<Todo> - Retrieves filtered todos
++getStats(userId): Object - Returns completion statistics by category
++update(todoId, userId, updateData): Todo - Updates todo details
++toggleComplete(todoId, userId): Todo - Marks todo as complete/incomplete
++delete(todoId, userId): void - Deletes todo from database
+
+FUNCTIONALITY:
+Manages todo list with categories (personal, study, health, other) and priorities (low, medium, high). Tracks completion status with timestamps. Provides statistics for completed vs pending tasks. Integrates with calendar view for deadline visualization.
+
+================================================================================
+CLASS 5: STUDYPLAN
+================================================================================
+
+ATTRIBUTES:
+-userId: ObjectId
+-subject: String
+-topic: String
+-duration: Number
+-date: Date
+-notes: String
+-completed: Boolean
+-completedAt: Date
+-createdAt: Date
+-updatedAt: Date
+
+METHODS:
++create(userId, subject, topic, duration): StudyPlan - Creates study plan
++getAll(userId, completed): Array<StudyPlan> - Retrieves filtered study plans
++getStats(userId): Object - Returns total study time and subject breakdown
++update(planId, userId, updateData): StudyPlan - Updates study plan details
++toggleComplete(planId, userId): StudyPlan - Marks plan as complete/incomplete
++delete(planId, userId): void - Deletes study plan from database
+
+FUNCTIONALITY:
+Manages study schedules with subjects, topics, and durations. Tracks total study time and completed sessions. Provides statistics including monthly study hours and subject-wise distribution. Integrates with calendar for study session planning.
+
+================================================================================
+CLASS 6: THERAPIST
+================================================================================
+
+ATTRIBUTES:
+-email: String
+-password: String
+-name: String
+-profilePicture: String
+-about: String
+-specializations: Array<String>
+-education: String
+-experience: Number
+-languages: Array<String>
+-pricing.perSession: Number
+-pricing.currency: String
+-currentSession.isActive: Boolean
+-timeSlots.date: String
+-timeSlots.slots.startTime: String
+-timeSlots.slots.isBooked: Boolean
+-rating: Number
+-reviewCount: Number
+-reviews.rating: Number
+-reviews.comment: String
+-isActive: Boolean
+-createdAt: Date
+
+METHODS:
++getAll(isActive): Array<Therapist> - Retrieves all active therapists
++getFeatured(): Array<Therapist> - Gets top-rated therapists (sorted by rating)
++search(query): Array<Therapist> - Searches therapists by name or specialty
++getById(therapistId): Therapist - Gets single therapist with reviews
++getAvailability(therapistId): Object - Returns available time slots
++bookSlot(date, startTime, appointmentId): Slot - Books therapist time slot
++releaseSlot(date, startTime): void - Releases booked slot (for cancellations)
++updateRating(): void - Recalculates rating from all reviews
+
+FUNCTIONALITY:
+Manages therapist profiles with specializations (Depression, Anxiety, Stress Management, Teen Counseling, etc.). Handles time slot booking system with 3 slots per day. Tracks current active sessions for real-time availability. Stores user reviews and calculates average ratings. Supports search by name or specialty.
+
+================================================================================
+CLASS 7: APPOINTMENT
+================================================================================
+
+ATTRIBUTES:
+-userId: ObjectId
+-therapistId: ObjectId
+-therapistName: String
+-date: Date
+-startTime: String
+-duration: Number
+-type: String
+-status: String
+-notes: String
+-reason: String
+-meetingLink: String
+-reminderSent: Boolean
+-payment.amount: Number
+-payment.status: String
+-payment.transactionId: String
+-payment.method: String
+-cancellation.cancelledBy: String
+-cancellation.reason: String
+-review.rating: Number
+-review.comment: String
+-sessionNotes: String
+-createdAt: Date
+-updatedAt: Date
+
+METHODS:
++create(appointmentData): Appointment - Books new appointment with therapist
++getAll(userId, status): Array<Appointment> - Retrieves filtered appointments
++getUpcoming(userId, userType): Array<Appointment> - Gets upcoming scheduled appointments
++getStats(userId): Object - Returns appointment statistics (total, completed, cancelled)
++update(appointmentId, updateData): Appointment - Updates appointment details
++cancel(appointmentId, reason): Appointment - Cancels appointment and releases slot
++markComplete(appointmentId): Appointment - Marks appointment as completed
++addReview(appointmentId, rating, comment): Appointment - Adds post-session review
+
+FUNCTIONALITY:
+Manages complete appointment lifecycle from booking to completion. Creates appointments after payment processing (UPI/Credit Card). Generates Jitsi video meeting links. Enforces 5-minute wait time before session access. Tracks payment status, transaction IDs, and cancellations. Collects user reviews and ratings after session completion. Provides statistics for user dashboard.
+
+================================================================================
+CLASS 8: CHATMESSAGE
+================================================================================
+
+ATTRIBUTES:
+-conversationId: ObjectId
+-senderId: ObjectId
+-receiverId: ObjectId
+-message: String
+-type: String
+-isAI: Boolean
+-metadata.sentiment: String
+-metadata.category: String
+-isRead: Boolean
+-readAt: Date
+-createdAt: Date
+-updatedAt: Date
+
+METHODS:
++createConversation(participantId, type, title): Conversation - Creates new conversation
++getAllConversations(userId): Array<Conversation> - Gets all user conversations
++sendMessage(conversationId, message, type): ChatMessage - Sends new message
++getAllMessages(conversationId): Array<ChatMessage> - Retrieves conversation messages
++getUnreadCount(userId): Number - Returns unread message count
++markAsRead(messageId, userId): ChatMessage - Marks message as read
++deleteMessage(messageId, userId): void - Deletes message from conversation
+
+FUNCTIONALITY:
+Manages chat conversations and message history. Stores AI chatbot conversations (Botpress integration). Supports multiple message types (text, image, file, audio, video). Tracks read/unread status with timestamps. Records sentiment analysis and message categories. Maintains conversation history for user reference.
+
+================================================================================
+CLASS 9: RESOURCE
+================================================================================
+
+ATTRIBUTES:
+-title: String
+-description: String
+-category: String
+-type: String
+-url: String
+-thumbnail: String
+-duration: String
+-difficulty: String
+-tags: Array<String>
+-author.name: String
+-isPremium: Boolean
+-isFeatured: Boolean
+-views: Number
+-likes: Number
+-downloads: Number
+-rating: Number
+-isActive: Boolean
+-createdAt: Date
+
+METHODS:
++getAll(category, type, difficulty): Array<Resource> - Gets filtered resources
++getFeatured(): Array<Resource> - Retrieves featured resources (top-rated)
++search(query): Array<Resource> - Searches resources by title/description/tags
++getCategories(): Array<Object> - Returns resource categories with counts
++getById(resourceId): Resource - Gets single resource and increments view count
++create(resourceData): Resource - Creates new resource entry
++like(resourceId): Resource - Increments like count for resource
++incrementDownload(resourceId): Resource - Increments download counter
+
+FUNCTIONALITY:
+Manages mental wellness resources library. Categories include article, video, audio, exercise, worksheet, book, podcast, and app. Types cover anxiety, depression, stress, sleep, relationships, self-esteem, mindfulness, and general topics. Tracks engagement metrics (views, likes, downloads). Supports difficulty levels (beginner, intermediate, advanced) and premium content. Provides search and filtering by tags, categories, and types.
+
+================================================================================
+
+RELATIONSHIPS:
+
+User (1) ───────► Mood (many)
+User (1) ───────► Journal (many)
+User (1) ───────► Todo (many)
+User (1) ───────► StudyPlan (many)
+User (1) ───────► Appointment (many)
+User (1) ───────► ChatMessage (many)
+
+Therapist (1) ───────► Appointment (many)
+
+Appointment (1) ───────► User (1)
+Appointment (1) ───────► Therapist (1)
+
+ChatMessage (many) ───────► Conversation (1)
+
+================================================================================
+
+NOTES:
+- All attributes verified from /server/models/*.js
+- All methods verified from /server/routes/*.js
+- Botpress AI chatbot is frontend-only integration (embedded webchat widget)
+- ChatMessage stores conversation history in MongoDB database
+- Appointment integrates with Jitsi for video conferencing
+- Payment system uses fake processing (demo purposes)
+
+================================================================================

@@ -1,0 +1,371 @@
+ZEN-MIND CLASS DIAGRAM - VERIFIED FROM ACTUAL CODE
+CSE Department, KLECET, Chikodi 2024-25
+
+============================================
+1. USER CLASS
+============================================
+
+Attributes:
+
+* name: String
+* email: String
+* password: String
+* age: Number
+* avatar: String
+* role: String
+* profile.bio: String
+* profile.pronouns: String
+* profile.phone: String
+* profile.gender: String
+* profile.dateOfBirth: Date
+* profile.interests: Array<String>
+* profile.supportNeeds: Array<String>
+* settings.notifications.email: Boolean
+* settings.notifications.push: Boolean
+* settings.notifications.reminders: Boolean
+* settings.privacy.profileVisibility: String
+* settings.privacy.shareProgress: Boolean
+* settings.theme: String
+* subscription.plan: String
+* subscription.startDate: Date
+* subscription.endDate: Date
+* subscription.isActive: Boolean
+* streakCount: Number
+* lastCheckIn: Date
+* createdAt: Date
+* updatedAt: Date
+
+Methods:
+
+1. register(name, email, password, age): User
+2. login(email, password): Token
+3. comparePassword(candidatePassword): Boolean
+4. updateProfile(profileData): User
+5. updatePassword(currentPassword, newPassword): User
+6. updateAvatar(avatar): User
+7. updateStreak(): User
+
+============================================
+2. MOOD CLASS
+============================================
+
+Attributes:
+
+* userId: ObjectId
+* mood: String
+* intensity: Number
+* emotions: Array<String>
+* activities: Array<String>
+* triggers: Array<String>
+* notes: String
+* energy: Number
+* sleep.hours: Number
+* sleep.quality: String
+* social: String
+* suggestion.activity: String
+* suggestion.book: String
+* suggestion.song: String
+* suggestion.exercise: String
+* suggestion.emotion: String
+* suggestion.intensity: Number
+* date: Date
+* createdAt: Date
+* updatedAt: Date
+
+Methods:
+
+1. create(moodData): Mood
+2. getAll(userId, limit, sort): Array<Mood>
+3. getUserStats(userId, days): Object
+4. getById(moodId, userId): Mood
+5. update(moodId, userId, updateData): Mood
+6. delete(moodId, userId): void
+7. getByDateRange(userId, startDate, endDate): Array<Mood>
+
+============================================
+3. JOURNAL CLASS
+============================================
+
+Attributes:
+
+* userId: ObjectId
+* title: String
+* content: String
+* mood: String
+* tags: Array<String>
+* isPrivate: Boolean
+* isFavorite: Boolean
+* gratitude: Array<String>
+* goals.text: String
+* goals.completed: Boolean
+* aiInsights.sentiment: String
+* aiInsights.themes: Array<String>
+* aiInsights.suggestions: Array<String>
+* attachments.type: String
+* attachments.url: String
+* attachments.name: String
+* createdAt: Date
+* updatedAt: Date
+
+Methods:
+
+1. create(userId, title, content, mood, tags): Journal
+2. getAll(userId, limit, sort, tag): Array<Journal>
+3. getUserStats(userId): Object
+4. search(userId, query): Array<Journal>
+5. getByDate(userId, date): Array<Journal>
+6. getById(journalId, userId): Journal
+7. update(journalId, userId, updateData): Journal
+8. toggleFavorite(journalId, userId): Journal
+9. delete(journalId, userId): void
+
+============================================
+4. TODO CLASS
+============================================
+
+Attributes:
+
+* userId: ObjectId
+* text: String
+* completed: Boolean
+* category: String
+* priority: String
+* dueDate: Date
+* completedAt: Date
+* createdAt: Date
+* updatedAt: Date
+
+Methods:
+
+1. create(userId, text, category, priority, dueDate): Todo
+2. getAll(userId, completed, category, sort): Array<Todo>
+3. getStats(userId): Object
+4. getById(todoId, userId): Todo
+5. update(todoId, userId, updateData): Todo
+6. delete(todoId, userId): void
+7. toggleComplete(todoId, userId): Todo
+
+============================================
+5. STUDYPLAN CLASS
+============================================
+
+Attributes:
+
+* userId: ObjectId
+* subject: String
+* topic: String
+* duration: Number
+* date: Date
+* notes: String
+* completed: Boolean
+* completedAt: Date
+* createdAt: Date
+* updatedAt: Date
+
+Methods:
+
+1. create(userId, subject, topic, duration, date, notes): StudyPlan
+2. getAll(userId, completed, sort): Array<StudyPlan>
+3. getStats(userId): Object
+4. getById(planId, userId): StudyPlan
+5. update(planId, userId, updateData): StudyPlan
+6. delete(planId, userId): void
+7. toggleComplete(planId, userId): StudyPlan
+
+============================================
+6. THERAPIST CLASS
+============================================
+
+Attributes:
+
+* email: String
+* password: String
+* name: String
+* profilePicture: String
+* about: String
+* specializations: Array<String>
+* education: String
+* experience: Number
+* languages: Array<String>
+* pricing.perSession: Number
+* pricing.duration: Number
+* pricing.currency: String
+* currentSession.isActive: Boolean
+* currentSession.appointmentId: ObjectId
+* currentSession.startedAt: Date
+* currentSession.endsAt: Date
+* timeSlots.date: String
+* timeSlots.slots.startTime: String
+* timeSlots.slots.endTime: String
+* timeSlots.slots.isBooked: Boolean
+* timeSlots.slots.appointmentId: ObjectId
+* rating: Number
+* reviewCount: Number
+* reviews.appointmentId: ObjectId
+* reviews.userId: ObjectId
+* reviews.userName: String
+* reviews.rating: Number
+* reviews.comment: String
+* reviews.createdAt: Date
+* totalSessions: Number
+* isActive: Boolean
+* role: String
+* createdAt: Date
+* updatedAt: Date
+
+Methods:
+
+1. getAll(isActive): Array<Therapist>
+2. getFeatured(): Array<Therapist>
+3. search(query): Array<Therapist>
+4. getById(therapistId): Therapist
+5. create(therapistData): Therapist
+6. update(therapistId, updateData): Therapist
+7. delete(therapistId): void
+8. getAvailability(therapistId): Object
+9. getSlotsByDate(therapistId, date): Array<Slot>
+
+============================================
+7. APPOINTMENT CLASS
+============================================
+
+Attributes:
+
+* userId: ObjectId
+* therapistId: ObjectId
+* therapistName: String
+* therapistAvatar: String
+* date: Date
+* startTime: String
+* endTime: String
+* duration: Number
+* type: String
+* status: String
+* notes: String
+* reason: String
+* meetingLink: String
+* reminderSent: Boolean
+* payment.amount: Number
+* payment.currency: String
+* payment.status: String
+* payment.transactionId: String
+* payment.paidAt: Date
+* payment.method: String
+* cancellation.cancelledBy: String
+* cancellation.reason: String
+* cancellation.cancelledAt: Date
+* review.rating: Number
+* review.comment: String
+* review.createdAt: Date
+* sessionNotes: String
+* createdAt: Date
+* updatedAt: Date
+
+Methods:
+
+1. create(appointmentData): Appointment
+2. getAll(userId, status, upcoming): Array<Appointment>
+3. getUpcoming(userId, userType): Array<Appointment>
+4. getStats(userId, userType): Object
+5. clearPast(userId): void
+6. getById(appointmentId): Appointment
+7. update(appointmentId, updateData): Appointment
+8. cancel(appointmentId, cancelledBy, reason): Appointment
+9. markComplete(appointmentId): Appointment
+10. addReview(appointmentId, rating, comment): Appointment
+
+============================================
+8. CHATMESSAGE CLASS
+============================================
+
+Attributes:
+
+* conversationId: ObjectId
+* senderId: ObjectId
+* receiverId: ObjectId
+* message: String
+* type: String
+* isAI: Boolean
+* metadata.sentiment: String
+* metadata.category: String
+* metadata.relatedResources: Array<String>
+* attachments.type: String
+* attachments.url: String
+* attachments.size: Number
+* isRead: Boolean
+* readAt: Date
+* isEdited: Boolean
+* editedAt: Date
+* createdAt: Date
+* updatedAt: Date
+
+Methods:
+
+1. createConversation(participantId, type, title): Conversation
+2. getAllConversations(userId, type): Array<Conversation>
+3. getConversation(conversationId, userId): Conversation
+4. deleteConversation(conversationId, userId): void
+5. sendMessage(conversationId, senderId, message, type): ChatMessage
+6. getAllMessages(conversationId, userId, limit, before): Array<ChatMessage>
+7. getUnreadCount(userId): Number
+8. markAsRead(messageId, userId): ChatMessage
+9. deleteMessage(messageId, userId): void
+
+============================================
+9. RESOURCE CLASS
+============================================
+
+Attributes:
+
+* title: String
+* description: String
+* category: String
+* type: String
+* content: String
+* url: String
+* thumbnail: String
+* duration: String
+* difficulty: String
+* tags: Array<String>
+* author.name: String
+* author.credentials: String
+* isPremium: Boolean
+* isFeatured: Boolean
+* views: Number
+* likes: Number
+* downloads: Number
+* rating: Number
+* reviewCount: Number
+* publishedAt: Date
+* isActive: Boolean
+* createdAt: Date
+* updatedAt: Date
+
+Methods:
+
+1. getAll(filters): Array<Resource>
+2. getFeatured(): Array<Resource>
+3. search(query): Array<Resource>
+4. getCategories(): Array<Object>
+5. getById(resourceId): Resource
+6. create(resourceData): Resource
+7. update(resourceId, updateData): Resource
+8. delete(resourceId): void
+9. like(resourceId): Resource
+10. incrementDownload(resourceId): Resource
+11. incrementViews(): Resource
+
+============================================
+
+NOTES:
+
+* sleep.hours and sleep.quality exist in Mood model (verified at /server/models/Mood.js lines 38-44)
+* Therapist uses timeSlots not availableSlots
+* Appointment has sessionNotes attribute
+* ChatMessage stores AI chat history (Botpress is frontend widget only)
+* Resource categories: article, video, audio, exercise, worksheet, book, podcast, app
+* Resource types: anxiety, depression, stress, sleep, relationships, self-esteem, mindfulness, general
+* All attributes verified from /server/models/*.js
+* All methods verified from /server/routes/*.js
+
+============================================

@@ -1,0 +1,139 @@
+═══════════════════════════════════════════════════════════════════════════════
+  SIMPLE GPT PROMPTS FOR ZEN-MIND DIAGRAMS
+═══════════════════════════════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════════════════════════════
+  1. USE CASE DIAGRAM PROMPT (Copy & Paste to ChatGPT)
+═══════════════════════════════════════════════════════════════════════════════
+
+Create a clean UML Use Case Diagram for ZEN-MIND mental wellness app.
+
+ACTORS:
+• Guest - Views landing page, registers, logs in
+• User (Teen 13-19) - Uses all features after login
+• Therapist - Manages sessions and profile
+
+USER FEATURES (Group in colored boxes):
+1. Mental Wellness: Track mood, write journals, view history
+2. Productivity: Create todos, make study plans, view calendar
+3. AI Chat: Chat with Botpress AI assistant
+4. Resources: Watch videos, listen music, play games
+5. Therapy: Browse therapists, book sessions, join video calls, write reviews
+
+THERAPIST FEATURES:
+• Login to portal, view today's appointments, join sessions, update pricing
+
+EXTERNAL SYSTEMS:
+• Botpress (AI), Jitsi (Video), MongoDB (Database)
+
+KEY RULES:
+- Instant booking (no slots)
+- 30-minute sessions with 5-minute wait
+- Payment before joining
+- Reviews after sessions
+
+Make it colorful, organized, and professional.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  2. CLASS DIAGRAM PROMPT (Copy & Paste to ChatGPT)
+═══════════════════════════════════════════════════════════════════════════════
+
+Create a clean UML Class Diagram for ZEN-MIND mental wellness app.
+
+CLASSES TO INCLUDE:
+
+1. User
+   - id, name, email, password, age (13-19), phone, gender
+   - Methods: register(), login(), updateProfile()
+
+2. Mood
+   - id, userId, mood, intensity (1-10), note, emotions[], timestamp
+   - Methods: trackMood(), getMoodHistory(), deleteMood()
+
+3. Journal
+   - id, userId, title, content, tags[], mood, isFavorite, date
+   - Methods: createEntry(), editEntry(), deleteEntry(), searchJournals()
+
+4. Todo
+   - id, userId, task, category, priority, isCompleted, dueDate
+   - Methods: createTodo(), toggleComplete(), updateTodo(), deleteTodo()
+
+5. StudyPlan
+   - id, userId, subject, topic, duration, isCompleted, date
+   - Methods: createPlan(), toggleComplete(), updatePlan(), deletePlan()
+
+6. Therapist
+   - id, name, email, password, about, education, experience, pricing, languages[], specializations[], photo, isBusy
+   - Methods: login(), updateProfile(), changePassword(), updatePricing()
+
+7. Appointment
+   - id, userId, therapistId, sessionDate, duration (30 min), meetingLink, status, paymentId
+   - Methods: bookSession(), joinSession(), cancelSession(), endSession()
+
+8. Review
+   - id, appointmentId, userId, therapistId, rating (1-5), comment, date
+   - Methods: submitReview(), getTherapistReviews()
+
+9. AIService
+   - botpressWebchatId
+   - Methods: sendMessage(), receiveResponse(), generateSuggestions()
+
+RELATIONSHIPS:
+- User has many: Moods, Journals, Todos, StudyPlans, Appointments, Reviews
+- Therapist has many: Appointments, Reviews
+- Appointment has one Review
+- User interacts with AIService
+
+Make it clean, organized, and professional with clear relationships.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  3. SUPER SHORT VERSION (For Quick Diagrams)
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 USE CASE (Ultra-Short):
+--------------------
+"Create UML use case diagram for ZEN-MIND teen mental wellness app. 
+Actors: Guest, User (teen), Therapist. 
+Features: mood tracking, journals, todos, study plans, AI chat, resources, therapist booking with video sessions. 
+Show external systems: Botpress, Jitsi, MongoDB. 
+Make it colorful and organized."
+
+
+🎯 CLASS DIAGRAM (Ultra-Short):
+------------------------
+"Create UML class diagram for ZEN-MIND mental wellness app.
+Classes: User, Mood, Journal, Todo, StudyPlan, Therapist, Appointment, Review, AIService.
+Show attributes, methods, and relationships (User has many moods/journals/todos/appointments).
+Make it clean and professional."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  4. TIPS FOR BEST RESULTS
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ DO:
+- Keep prompt under 300 words
+- Group related features together
+- Use bullet points and clear structure
+- Mention "clean", "organized", "professional"
+- Specify colors if you want them
+
+❌ DON'T:
+- Include too many technical details
+- Write long paragraphs
+- Add implementation details
+- Overcomplicate relationships
+- Use complex terminology
+
+🎨 FOR PLANTUML GENERATION:
+- Start prompt with "Generate PlantUML code for..."
+- Add "skinparam classAttributeIconSize 0" for cleaner look
+- Specify "title [Your Title]" at the start
+- Use packages for grouping (like your friend's example)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  END OF DOCUMENT
+═══════════════════════════════════════════════════════════════════════════════

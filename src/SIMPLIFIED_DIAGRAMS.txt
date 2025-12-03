@@ -1,0 +1,436 @@
+═══════════════════════════════════════════════════════════════════════════════
+  ZEN-MIND SIMPLIFIED DIAGRAMS - PlantUML Code
+═══════════════════════════════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════════════════════════════
+  1. SIMPLIFIED USE CASE DIAGRAM
+═══════════════════════════════════════════════════════════════════════════════
+
+@startuml ZEN-MIND_UseCase_Simple
+
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+title ZEN-MIND Mental Wellness Platform - Use Case Diagram
+
+' ACTORS
+actor "Unregistered\nUser" as Guest #FFE4E1
+actor "User\n(Teen)" as User #E0FFE0
+actor "Therapist" as Therapist #E0F0FF
+
+rectangle "ZEN-MIND SYSTEM" {
+
+  ' PUBLIC ACCESS
+  package "PUBLIC ACCESS" #F5F5F5 {
+    (Register) as REG
+    (Login) as LOGIN
+    (View Landing) as LAND
+  }
+
+  ' MENTAL WELLNESS
+  package "MENTAL WELLNESS" #FFE4E1 {
+    (Track Mood) as MOOD
+    (View Mood History) as MOOD_H
+    (Delete Mood) as MOOD_D
+    (Create Journal) as JOUR
+    (Edit Journal) as JOUR_E
+    (Search Journals) as JOUR_S
+    (Delete Journal) as JOUR_D
+    (Toggle Favorite) as JOUR_F
+  }
+
+  ' PRODUCTIVITY TOOLS
+  package "PRODUCTIVITY TOOLS" #E0FFE0 {
+    (Create Todo) as TODO
+    (Toggle Complete) as TODO_T
+    (Update Todo) as TODO_U
+    (Delete Todo) as TODO_D
+    (Create Study Plan) as STUDY
+    (Toggle Study) as STUDY_T
+    (Update Study) as STUDY_U
+    (Delete Study) as STUDY_D
+    (View Calendar) as CAL
+  }
+
+  ' AI & RESOURCES
+  package "AI & RESOURCES" #E6E6FA {
+    (Chat with AI) as AI
+    (Browse Resources) as RES
+    (Watch Videos) as VID
+    (Listen Music) as MUS
+    (Play Games) as GAME
+  }
+
+  ' THERAPIST SERVICES
+  package "THERAPIST SERVICES" #E0F0FF {
+    (Browse Therapists) as TH_BROWSE
+    (Search Therapists) as TH_SEARCH
+    (View Profile) as TH_PROF
+    (Select Duration) as TH_DUR
+    (Make Payment) as PAY
+    (Book Session) as BOOK
+    (Join Video) as VIDEO
+    (View Appointments) as APPT
+    (Cancel Session) as CANCEL
+    (Submit Review) as REVIEW
+  }
+
+  ' THERAPIST PORTAL
+  package "THERAPIST AUTHENTICATION" #FFDAB9 {
+    (Login Portal) as TH_LOGIN
+    (Update Profile) as TH_UPDATE
+    (Change Password) as TH_PASS
+    (Reset via OTP) as TH_OTP
+    (Logout) as TH_LOGOUT
+  }
+
+  package "SESSION MANAGEMENT" #B0C4DE {
+    (View Today) as TH_TODAY
+    (Join Session) as TH_VIDEO
+    (End Session) as TH_END
+    (Update Pricing) as TH_PRICE
+  }
+
+}
+
+' EXTERNAL SYSTEMS
+rectangle "EXTERNAL SYSTEMS" #FFFACD {
+  (Botpress AI) as EXT_BOT
+  (Jitsi Video) as EXT_JITSI
+  (YouTube) as EXT_YT
+  (Spotify) as EXT_SPOT
+  (MongoDB) as EXT_DB
+  (Email OTP) as EXT_MAIL
+}
+
+' GUEST CONNECTIONS
+Guest --> LAND
+Guest --> REG
+Guest --> LOGIN
+
+' USER CONNECTIONS
+User --> LOGIN
+User --> MOOD
+User --> MOOD_H
+User --> MOOD_D
+User --> JOUR
+User --> JOUR_E
+User --> JOUR_S
+User --> JOUR_D
+User --> JOUR_F
+User --> TODO
+User --> TODO_T
+User --> TODO_U
+User --> TODO_D
+User --> STUDY
+User --> STUDY_T
+User --> STUDY_U
+User --> STUDY_D
+User --> CAL
+User --> AI
+User --> RES
+User --> VID
+User --> MUS
+User --> GAME
+User --> TH_BROWSE
+User --> TH_SEARCH
+User --> TH_PROF
+User --> TH_DUR
+User --> PAY
+User --> BOOK
+User --> VIDEO
+User --> APPT
+User --> CANCEL
+User --> REVIEW
+
+' THERAPIST CONNECTIONS
+Therapist --> TH_LOGIN
+Therapist --> TH_UPDATE
+Therapist --> TH_PASS
+Therapist --> TH_OTP
+Therapist --> TH_LOGOUT
+Therapist --> TH_TODAY
+Therapist --> TH_VIDEO
+Therapist --> TH_END
+Therapist --> TH_PRICE
+
+' EXTERNAL CONNECTIONS
+AI --> EXT_BOT
+VIDEO --> EXT_JITSI
+TH_VIDEO --> EXT_JITSI
+VID --> EXT_YT
+MUS --> EXT_SPOT
+TH_OTP --> EXT_MAIL
+BOOK ..> EXT_DB : store
+MOOD ..> EXT_DB : store
+JOUR ..> EXT_DB : store
+
+' KEY RELATIONSHIPS
+BOOK ..> PAY : <<include>>
+VIDEO ..> BOOK : <<require>>
+REVIEW ..> APPT : <<extend>>
+
+@enduml
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  2. SIMPLIFIED CLASS DIAGRAM
+═══════════════════════════════════════════════════════════════════════════════
+
+@startuml ZEN-MIND_Class_Simple
+
+skinparam classAttributeIconSize 0
+
+title ZEN-MIND Mental Wellness Platform - Class Diagram
+
+' USER CLASS
+class User {
+  - _id: ObjectId
+  - name: String
+  - email: String
+  - password: String (hashed)
+  - age: Number (13-19)
+  - phone: String
+  - gender: String
+  - createdAt: Date
+  --
+  + register()
+  + login()
+  + updateProfile()
+  + changePassword()
+}
+
+' MOOD CLASS
+class Mood {
+  - _id: ObjectId
+  - userId: ObjectId
+  - mood: String
+  - intensity: Number (1-10)
+  - note: String
+  - emotions: String[]
+  - timestamp: Date
+  --
+  + trackMood()
+  + getMoodHistory()
+  + deleteMood()
+  + getStatistics()
+}
+
+' JOURNAL CLASS
+class Journal {
+  - _id: ObjectId
+  - userId: ObjectId
+  - title: String
+  - content: String
+  - tags: String[]
+  - mood: String
+  - isFavorite: Boolean
+  - createdAt: Date
+  --
+  + createEntry()
+  + editEntry()
+  + deleteEntry()
+  + toggleFavorite()
+  + searchJournals()
+}
+
+' TODO CLASS
+class Todo {
+  - _id: ObjectId
+  - userId: ObjectId
+  - task: String
+  - category: String
+  - priority: String
+  - isCompleted: Boolean
+  - dueDate: Date
+  --
+  + createTodo()
+  + toggleComplete()
+  + updateTodo()
+  + deleteTodo()
+}
+
+' STUDY PLAN CLASS
+class StudyPlan {
+  - _id: ObjectId
+  - userId: ObjectId
+  - subject: String
+  - topic: String
+  - duration: Number
+  - isCompleted: Boolean
+  - date: Date
+  --
+  + createPlan()
+  + toggleComplete()
+  + updatePlan()
+  + deletePlan()
+}
+
+' THERAPIST CLASS
+class Therapist {
+  - _id: ObjectId
+  - name: String
+  - email: String
+  - password: String (hashed)
+  - about: String
+  - education: String
+  - experience: Number
+  - pricing: Number
+  - languages: String[]
+  - specializations: String[]
+  - photo: String
+  - isBusy: Boolean
+  --
+  + login()
+  + updateProfile()
+  + changePassword()
+  + resetPassword()
+  + updatePricing()
+}
+
+' APPOINTMENT CLASS
+class Appointment {
+  - _id: ObjectId
+  - userId: ObjectId
+  - therapistId: ObjectId
+  - sessionDate: Date
+  - duration: Number (30 mins)
+  - meetingLink: String
+  - status: String (scheduled/completed)
+  - paymentId: String
+  --
+  + bookSession()
+  + joinSession()
+  + cancelSession()
+  + endSession()
+}
+
+' REVIEW CLASS
+class Review {
+  - _id: ObjectId
+  - appointmentId: ObjectId
+  - userId: ObjectId
+  - therapistId: ObjectId
+  - rating: Number (1-5)
+  - comment: String
+  - createdAt: Date
+  --
+  + submitReview()
+  + getTherapistReviews()
+}
+
+' AI SERVICE CLASS
+class AIService {
+  - botpressWebchatId: String
+  --
+  + sendMessage()
+  + receiveResponse()
+  + generateSuggestions()
+}
+
+' RELATIONSHIPS
+User "1" -- "0..*" Mood : tracks
+User "1" -- "0..*" Journal : writes
+User "1" -- "0..*" Todo : creates
+User "1" -- "0..*" StudyPlan : plans
+User "1" -- "0..*" Appointment : books
+User "1" -- "0..*" Review : submits
+Therapist "1" -- "0..*" Appointment : conducts
+Therapist "1" -- "0..*" Review : receives
+Appointment "1" -- "0..1" Review : generates
+User "1" -- "1" AIService : interacts
+
+@enduml
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  3. QUICK REFERENCE SUMMARY
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 FEATURES SUMMARY:
+-------------------
+✓ Authentication (Register/Login for Users & Therapists)
+✓ Mood Tracking (10-point scale with emotions)
+✓ Journal Entries (with tags, favorites, search)
+✓ Todo Management (with categories & priorities)
+✓ Study Plans (with subjects & duration tracking)
+✓ AI Chatbot (Botpress integration)
+✓ Resources (videos, music, games)
+✓ Therapist Booking (instant sessions, fake payment)
+✓ Video Sessions (Jitsi, 5-min wait, 30-min duration)
+✓ Reviews & Ratings (post-session feedback)
+
+👥 ACTORS:
+----------
+1. Unregistered User (Guest) - Landing, Register, Login
+2. User (Teen 13-19) - All mental wellness & therapy features
+3. Therapist - Profile, Sessions, Pricing management
+
+🗂️ CLASSES:
+-----------
+1. User - Authentication & profile
+2. Mood - Mood tracking entries
+3. Journal - Personal journal entries
+4. Todo - Task management
+5. StudyPlan - Study session planning
+6. Therapist - Therapist profiles
+7. Appointment - Therapy session bookings
+8. Review - Session feedback
+9. AIService - Botpress chatbot
+
+🔗 EXTERNAL INTEGRATIONS:
+-------------------------
+• Botpress Cloud (AI chatbot)
+• Jitsi (video conferencing)
+• YouTube (embedded videos)
+• Spotify (music playlists)
+• MongoDB Atlas (database)
+• Email Service (OTP for password reset)
+
+⚙️ KEY FEATURES:
+----------------
+• Instant booking (not slot-based)
+• 5-minute wait period before joining sessions
+• Fixed 30-minute session duration
+• Fake UPI/Credit Card payment simulation
+• Real-time therapist busy/available status
+• Age restriction (13-19 years old)
+• Cartoon-modern anime-style design
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  4. CHATGPT PROMPT (SIMPLIFIED)
+═══════════════════════════════════════════════════════════════════════════════
+
+Create a professional UML Use Case Diagram for ZEN-MIND mental wellness app:
+
+ACTORS (3):
+- Unregistered User (Guest) - coral color
+- User (Teen, 13-19) - green color  
+- Therapist - blue color
+
+FEATURE GROUPS:
+1. Public Access (3): View Landing, Register, Login
+2. Mental Wellness (8): Track/View/Delete Mood, Create/Edit/Delete/Search Journals, Toggle Favorite
+3. Productivity Tools (9): CRUD operations for Todos & Study Plans, View Calendar
+4. AI & Resources (5): Chat AI, Browse Resources, Watch Videos, Listen Music, Play Games
+5. Therapist Services (10): Browse/Search Therapists, View Profile, Book/Join/Cancel Sessions, Review
+6. Therapist Portal (4): Login, Update Profile, Change/Reset Password
+7. Session Management (4): View Today, Join/End Session, Update Pricing
+
+EXTERNAL SYSTEMS (6):
+Botpress (AI), Jitsi (Video), YouTube, Spotify, MongoDB, Email (OTP)
+
+KEY FLOWS:
+- Register includes Login
+- Book Session includes Payment
+- Join Video requires 5-minute wait
+- Review extends Appointments
+- Sessions are 30 minutes, instant booking
+
+Design: Use ovals for use cases, stick figures for actors, group in colored packages, show solid lines for associations, dashed lines for include/extend relationships.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  END OF DOCUMENT
+═══════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,208 @@
+════════════════════════════════════════════════════════════════════════════════
+                    USE CASE DIAGRAM GENERATION PROMPT
+                            FOR ZEN-MIND APPLICATION
+════════════════════════════════════════════════════════════════════════════════
+
+Create a professional Use Case Diagram with the following specifications:
+
+TITLE: "ZEN-MIND Mental Wellness Platform"
+
+SYSTEM BOUNDARY: Draw a large rectangle labeled "ZEN-MIND System"
+
+═══════════════════════════════════════════════════════════════════════════════
+ACTORS (Draw as stick figures OUTSIDE the system boundary)
+═══════════════════════════════════════════════════════════════════════════════
+
+1. UNREGISTERED USER (left side, top)
+   - Position: Top-left outside boundary
+   - Label: "Unregistered User"
+
+2. USER (TEEN) (left side, middle)
+   - Position: Middle-left outside boundary
+   - Label: "User (Teen)"
+
+3. THERAPIST (right side, middle)
+   - Position: Middle-right outside boundary
+   - Label: "Therapist"
+
+═══════════════════════════════════════════════════════════════════════════════
+USE CASES (Draw as ovals INSIDE the system boundary)
+═══════════════════════════════════════════════════════════════════════════════
+
+AUTHENTICATION CLUSTER (top section):
+- Register
+- Login
+- Logout
+
+MOOD & WELLNESS CLUSTER (left-top section):
+- Track Mood
+- View Mood History
+- Generate AI Suggestions
+- Delete Mood Entry
+
+JOURNAL CLUSTER (left-middle section):
+- Create Journal Entry
+- Edit Journal Entry
+- Search Journals
+- Toggle Favorite
+- Delete Journal
+- View Journal Stats
+
+PRODUCTIVITY CLUSTER (middle section):
+- Create Todo
+- Toggle Todo Complete
+- Delete Todo
+- Create Study Plan
+- Toggle Study Complete
+- Delete Study Plan
+- View Calendar
+
+AI & RESOURCES CLUSTER (center-bottom section):
+- Chat with AI (Botpress)
+- Browse Resources
+- Watch Videos
+- Listen to Music
+- Play Mini Games
+
+THERAPIST SERVICES CLUSTER (right-center section):
+- Browse Therapists
+- Search Therapists
+- View Therapist Profile
+- Check Availability
+- Select Session Duration
+- Make Payment
+- Book Instant Session
+- Join Video Session
+- Submit Review
+- Cancel Appointment
+
+THERAPIST MANAGEMENT CLUSTER (right section):
+- Update Therapist Profile
+- Set Pricing
+- Add Time Slots
+- Delete Time Slots
+- View Appointments
+- Conduct Video Session
+- View Reviews
+
+PROFILE MANAGEMENT CLUSTER (bottom section):
+- Update User Profile
+- Change Password
+
+═══════════════════════════════════════════════════════════════════════════════
+CONNECTIONS (Draw lines from actors to use cases)
+═══════════════════════════════════════════════════════════════════════════════
+
+UNREGISTERED USER connects to:
+→ Register
+→ Login
+
+USER (TEEN) connects to:
+→ Login
+→ Logout
+→ Track Mood
+→ View Mood History
+→ Delete Mood Entry
+→ Create Journal Entry
+→ Edit Journal Entry
+→ Search Journals
+→ Toggle Favorite
+→ Delete Journal
+→ View Journal Stats
+→ Create Todo
+→ Toggle Todo Complete
+→ Delete Todo
+→ Create Study Plan
+→ Toggle Study Complete
+→ Delete Study Plan
+→ View Calendar
+→ Chat with AI (Botpress)
+→ Browse Resources
+→ Watch Videos
+→ Listen to Music
+→ Play Mini Games
+→ Browse Therapists
+→ Search Therapists
+→ View Therapist Profile
+→ Check Availability
+→ Select Session Duration
+→ Make Payment
+→ Book Instant Session
+→ Join Video Session
+→ Submit Review
+→ Cancel Appointment
+→ Update User Profile
+→ Change Password
+
+THERAPIST connects to:
+→ Login
+→ Logout
+→ Update Therapist Profile
+→ Set Pricing
+→ Add Time Slots
+→ Delete Time Slots
+→ View Appointments
+→ Conduct Video Session
+→ View Reviews
+→ Change Password
+
+═══════════════════════════════════════════════════════════════════════════════
+INCLUDE RELATIONSHIPS (Use dashed arrows with <<include>>)
+═══════════════════════════════════════════════════════════════════════════════
+
+"Book Instant Session" <<include>> "Make Payment"
+"Book Instant Session" <<include>> "Generate Meeting Link" (system auto)
+"Track Mood" <<include>> "Generate AI Suggestions" (system auto)
+"Join Video Session" <<include>> "Enforce 5-Min Wait" (system auto)
+"Cancel Appointment" <<include>> "Release Slot" (system auto)
+
+═══════════════════════════════════════════════════════════════════════════════
+EXTEND RELATIONSHIPS (Use dashed arrows with <<extend>>)
+═══════════════════════════════════════════════════════════════════════════════
+
+"View Therapist Profile" <<extend>> "Browse Therapists"
+"Book Instant Session" <<extend>> "View Therapist Profile"
+"Submit Review" <<extend>> "Join Video Session"
+
+═══════════════════════════════════════════════════════════════════════════════
+VISUAL STYLING
+═══════════════════════════════════════════════════════════════════════════════
+
+- Use TEAL/TURQUOISE color for all ovals (use cases)
+- System boundary: Large rectangle with rounded corners
+- Actors: Simple stick figures
+- Connections: Solid lines from actors to use cases
+- Include/Extend: Dashed lines with stereotypes
+- Font: Clean, readable sans-serif
+- Layout: Organized in logical clusters, not overlapping
+
+═══════════════════════════════════════════════════════════════════════════════
+ADDITIONAL NOTES
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Group related use cases visually close together
+2. Make sure User (Teen) is clearly the primary actor with most connections
+3. Therapist section should be clearly separated on the right side
+4. Keep authentication use cases at the top
+5. Show Botpress and Jitsi as external systems (small rectangles outside boundary)
+6. Add legend showing: 
+   - Solid line = Association
+   - Dashed line with <<include>> = Required functionality
+   - Dashed line with <<extend>> = Optional functionality
+
+═══════════════════════════════════════════════════════════════════════════════
+DIAGRAM DESCRIPTION (To include below the diagram)
+═══════════════════════════════════════════════════════════════════════════════
+
+"This use case diagram illustrates the ZEN-MIND mental wellness platform for teenagers. The system serves three main actors: Unregistered Users who can register and login, Users (Teens) who access comprehensive mental health features including mood tracking, journaling, productivity tools (todos and study plans), AI chatbot support, educational resources, and professional therapy services through instant video sessions with payment processing, and Therapists who manage their profiles, availability slots, pricing, conduct video sessions, and receive user reviews. The system automates several processes including generating meeting links, enforcing wait periods, providing AI suggestions, and managing appointment slots. External integrations include Botpress for AI chat and Jitsi for video conferencing."
+
+════════════════════════════════════════════════════════════════════════════════
+                              END OF PROMPT
+════════════════════════════════════════════════════════════════════════════════
+
+INSTRUCTIONS FOR AI IMAGE GENERATION:
+1. Copy this entire prompt
+2. Paste into ChatGPT or Claude
+3. Ask: "Create a UML Use Case Diagram based on this specification"
+4. Request PNG export in high resolution (300 DPI minimum)
+5. Ensure all text is readable and connections are clear

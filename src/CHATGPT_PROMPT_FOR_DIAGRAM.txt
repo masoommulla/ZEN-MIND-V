@@ -1,0 +1,100 @@
+Create a professional UML Use Case Diagram for ZEN-MIND Mental Wellness Platform with the following specifications:
+
+TITLE: "ZEN-MIND Mental Wellness Platform - Use Case Diagram"
+
+ACTORS (3 stick figures):
+1. Unregistered User (top-left)
+2. User (Teen) - main actor (middle-left)
+3. Therapist (right side)
+
+SYSTEM BOUNDARY: Large rounded rectangle labeled "ZEN-MIND System"
+
+USE CASES (ovals inside boundary, organized in clusters):
+
+AUTHENTICATION CLUSTER (top):
+- Register
+- Login
+- Logout
+
+MOOD & WELLNESS (left section):
+- Track Mood
+- View Mood History
+- Delete Mood Entry
+- Generate AI Suggestions*
+
+JOURNALING (left-center):
+- Create Journal Entry
+- Edit Journal Entry
+- Search Journals
+- Toggle Favorite
+- Delete Journal
+- View Journal Stats
+
+PRODUCTIVITY (center):
+- Create Todo
+- Toggle Todo Complete
+- Delete Todo
+- Create Study Plan
+- Toggle Study Complete
+- Delete Study Plan
+- View Calendar
+
+AI & RESOURCES (bottom-center):
+- Chat with AI
+- Browse Resources
+- Watch Videos
+- Listen to Music
+- Play Mini Games
+
+THERAPY SERVICES (center-right):
+- Browse Therapists
+- Search Therapists
+- View Therapist Profile
+- Check Availability
+- Select Session Duration
+- Make Payment
+- Book Instant Session
+- Join Video Session
+- Submit Review
+- Cancel Appointment
+
+THERAPIST PORTAL (right section):
+- Update Therapist Profile
+- Set Pricing
+- Add Time Slots
+- Delete Time Slots
+- View Appointments
+- Conduct Video Session
+- View Reviews
+
+PROFILE SETTINGS (bottom):
+- Update Profile
+- Change Password
+
+CONNECTIONS (solid lines):
+• Unregistered User → Register, Login
+• User (Teen) → ALL use cases except Therapist Portal ones
+• Therapist → Login, Logout, Update Therapist Profile, Set Pricing, Add/Delete Time Slots, View Appointments, Conduct Video Session, View Reviews, Change Password
+
+INCLUDE RELATIONSHIPS (dashed arrows with <<include>>):
+• "Book Instant Session" includes "Make Payment"
+• "Track Mood" includes "Generate AI Suggestions"
+• "Join Video Session" includes "Enforce 5-Min Wait"
+• "Cancel Appointment" includes "Release Slot"
+
+EXTEND RELATIONSHIPS (dashed arrows with <<extend>>):
+• "Book Instant Session" extends from "View Therapist Profile"
+• "Submit Review" extends from "Join Video Session"
+
+EXTERNAL SYSTEMS (small rectangles outside boundary):
+- Botpress Cloud (connected to "Chat with AI")
+- Jitsi (connected to "Join Video Session" and "Conduct Video Session")
+
+STYLING:
+- Use teal/turquoise color for all use case ovals
+- Clean layout with logical grouping
+- Readable font, no overlapping elements
+- Legend showing: solid line = association, dashed = include/extend
+
+DESCRIPTION TEXT BELOW DIAGRAM:
+"This use case diagram illustrates the ZEN-MIND mental wellness platform for teenagers. Three actors interact with the system: Unregistered Users can register and login; Users (Teens) access comprehensive mental health features including mood tracking with AI suggestions, journaling with search and favorites, productivity tools (todos and study plans), AI chatbot support via Botpress, educational resources (videos, music, games), and professional therapy services through instant booking with payment, video sessions via Jitsi, and post-session reviews; Therapists manage their profiles, set pricing, create availability slots, conduct video sessions, and view user reviews. The system automates processes like generating meeting links, enforcing 5-minute wait periods, providing AI-driven suggestions, and managing appointment slots."

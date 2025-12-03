@@ -1,0 +1,155 @@
+═══════════════════════════════════════════════════════════════════
+        ZEN-MIND USE CASE DIAGRAM - SIMPLIFIED LIST
+═══════════════════════════════════════════════════════════════════
+
+ACTORS:
+-------
+1. Unregistered User
+2. User (Teen) 
+3. Therapist
+
+═══════════════════════════════════════════════════════════════════
+
+UNREGISTERED USER CAN DO:
+-------------------------
+1. Register
+2. Login
+
+═══════════════════════════════════════════════════════════════════
+
+USER (TEEN) CAN DO:
+------------------
+
+AUTHENTICATION:
+3. Login
+4. Logout
+
+MOOD TRACKING:
+5. Track Mood
+6. View Mood History
+7. Delete Mood Entry
+
+JOURNALING:
+8. Create Journal Entry
+9. Edit Journal Entry
+10. Search Journals
+11. Toggle Favorite Journal
+12. Delete Journal
+13. View Journal Stats
+
+PRODUCTIVITY:
+14. Create Todo
+15. Toggle Todo Complete
+16. Delete Todo
+17. Create Study Plan
+18. Toggle Study Complete
+19. Delete Study Plan
+20. View Calendar
+
+AI & RESOURCES:
+21. Chat with AI (Botpress)
+22. Browse Resources
+23. Watch Videos
+24. Listen to Music
+25. Play Mini Games
+
+THERAPY SERVICES:
+26. Browse Therapists
+27. Search Therapists
+28. View Therapist Profile
+29. Check Therapist Availability
+30. Select Session Duration
+31. Make Payment
+32. Book Instant Session
+33. Join Video Session
+34. Submit Review After Session
+35. Cancel Appointment
+36. View Appointment History
+
+PROFILE:
+37. Update Profile
+38. Change Password
+
+═══════════════════════════════════════════════════════════════════
+
+THERAPIST CAN DO:
+-----------------
+
+AUTHENTICATION:
+39. Login
+40. Logout
+
+PROFILE MANAGEMENT:
+41. Update Profile (name, email, photo, about, education, experience, languages, specializations)
+42. Change Password
+
+PRICING & AVAILABILITY:
+43. Set Pricing Per Session
+44. Add Time Slots
+45. Delete Time Slots (if not booked)
+46. View Slot Status
+
+APPOINTMENTS:
+47. View Appointments
+48. View Session Details
+49. Conduct Video Session
+50. View Reviews & Ratings
+
+═══════════════════════════════════════════════════════════════════
+
+SYSTEM AUTOMATED ACTIONS (Include relationships):
+-------------------------------------------------
+51. Generate Meeting Link (when appointment booked)
+52. Enforce 5-Minute Wait (before joining session)
+53. Update Session Status (scheduled → completed)
+54. Generate AI Suggestions (after mood log)
+55. Process Payment (fake payment verification)
+56. Update Therapist Availability (mark slot as booked)
+57. Release Slot on Cancellation
+
+═══════════════════════════════════════════════════════════════════
+
+KEY RELATIONSHIPS:
+-----------------
+
+INCLUDES (Required):
+• Book Instant Session → Make Payment
+• Book Instant Session → Generate Meeting Link
+• Track Mood → Generate AI Suggestions
+• Join Video Session → Enforce 5-Minute Wait
+• Cancel Appointment → Release Slot
+
+EXTENDS (Optional):
+• View Therapist Profile → Browse Therapists
+• Book Instant Session → View Therapist Profile
+• Submit Review → Join Video Session
+
+═══════════════════════════════════════════════════════════════════
+
+EXTERNAL SYSTEMS:
+----------------
+• Botpress Cloud (AI Chatbot)
+• Jitsi (Video Conferencing)
+• MongoDB Atlas (Database)
+• YouTube (Video Resources)
+• Spotify (Music Resources)
+
+═══════════════════════════════════════════════════════════════════
+
+FRONTEND VERIFIED FROM:
+-----------------------
+✅ UserSignup.tsx, UserLogin.tsx
+✅ MoodTracker.tsx
+✅ Journal.tsx (includes Todos and Study Plans)
+✅ AIChat.tsx
+✅ Resources.tsx
+✅ TherapistDashboardNew.tsx
+✅ BookingModalNew.tsx
+✅ FakePaymentModal.tsx
+✅ AppointmentsNew.tsx
+✅ JitsiVideoCall.tsx
+✅ Settings.tsx
+✅ TherapistLogin.tsx
+✅ TherapistPortal.tsx
+
+═══════════════════════════════════════════════════════════════════
